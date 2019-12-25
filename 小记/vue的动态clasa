@@ -1,0 +1,6 @@
+第一种<div class="hello" :class="{'div1':active}"> //单独绑定
+第二种 <div class="hello" :class="[!active ?'div1':'']"> // 数组绑定
+第三种 <!-- <div class="hello" :class="active ?'div1':''">//三元
+data :{active:true}
+第四种 <!-- <div class="hello" :class="active > //active是css类名
+data :{active:'textColor'}
