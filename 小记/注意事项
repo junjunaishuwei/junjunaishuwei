@@ -1,0 +1,84 @@
+如果不用return 可以直接用{{warehousingNamber}} 来表示
+超出部分省略
+overflow: hidden;
+text-overflow:ellipsis;
+white-space: nowrap;
+input输入框绑定失去焦点事件@blur ="事件" @focus ="事件"；
+vuex的使用
+import { mapState, mapMutations } from 'vuex';   //引入变量和方法
+computed: {
+...mapState(['business'])   //加入到computed缓存起来   ，用法{{business}}
+},
+//改变状态
+changeBusiness是vuex里mutations的方法
+dawo( ) {
+this.$store.commit('changeBusiness',true);			
+}
+动态绑定class ；aaa不能用this.aaa。手机上面无法显示
+：class ="aaa=="条件 " ？“class1”：“class2”   "
+             限制输入小数点后四位
+ 	function clearNoNum(val){
+				let num = String(val); 
+				val=num.match(/\d*(\.\d{0,4})?/)[0]
+				console.log(val)
+					} 
+用watch 来监听  并限制 输入小数点后四位
+   number(val) {
+ this.$nextTick(function(){
+		this.number =val.toString().match(/\d*(\.\d{0,4})?/)[0]
+		console.log(this.number)		
+		})
+}
+用 旋转必须display :block    //两个class变换
+.noarrow-rotation {
+		transform: rotate(0deg);
+		transition: all 0.5s;
+		display: inline-block;
+	}
+	.arrow-rotation {
+		transform: rotate(180deg);
+		transition: all 0.5s;
+		display: inline-block;
+	}
+ 使用字体库 
+引入
+@font-face {
+	font-family: iconfont;
+	src: url('~@/static/icon/iconfont.ttf');
+}
+.font-test {
+	font-family: 'iconfont' !important;
+}
+使用  加class
+<text class="font-test">&#xe64b;</text>   //复制字体的代码
+
+
+@input  表示input框正在输入时候时间， //电脑会有缺点比如第一次输入一个9，第二次输入8 vue中只能获取到9.手机没有
+onfocus 当input 获取到焦点时触发
+onblur 当input失去焦点时触发，注意：这个事件触发的前提是已经获取了焦点再失去焦点的时候会触发相应的js
+onchange 当input失去焦点并且它的value值发生变化时触发
+在使用border-size的时候不能使用border:1px solid red
+
+	getDateToday: function(str) {
+		
+		let date = new Date;
+		// 年
+		let year = date.getFullYear();
+		//月
+		let month = date.getMonth() + 1;
+		month = month < 10 ? '0' + month : month
+		//日
+		let day = date.getDate();
+	
+		day = day < 10 ? ('0' + day) : day;
+		let rq=""
+		if (str) {
+				console.log(123)
+			rq = year + str + month + str + day
+		} else {
+
+			rq = year + "年" + month + "月" + day + "日"
+		}
+		return rq
+	},这里如果直接在if里面用  rq = year + str + month + str + day 不在外面声明的话会报错，
+	用var就没有这个问题，应该是因为变量提升的问题
