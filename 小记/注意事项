@@ -1,3 +1,64 @@
+封装公共方法common.js
+let commfunc = {
+		getDateToday:function (){
+			var date=new Date;
+						  var year=date.getFullYear();
+						    //月
+						    var month=date.getMonth()+1;
+							month = month < 10 ? '0' + month : month
+						    //日
+						    var day=date.getDate();
+							day = day < 10 ? ('0' + day) : day;
+						    //时
+						    var hh=date.getHours();
+							hh=hh<10?('0'+hh):hh;
+						    //分
+						    var mm=date.getMinutes();
+						    //秒
+						    var ss=date.getSeconds();
+						    var rq=year+"年"+month+"月"+day+"日"	
+							return rq			
+		、},
+				            
+				  getDay:function(num, str) {
+				         var today = new Date();
+				         var nowTime = today.getTime();
+				         var ms = 24*3600*1000*num;
+				         today.setTime(parseInt(nowTime + ms));
+				         var oYear = today.getFullYear();
+				         var oMoth = (today.getMonth() + 1).toString();
+				         if (oMoth.length <= 1) oMoth = '0' + oMoth;
+				         var oDay = today.getDate().toString();
+				         if (oDay.length <= 1) oDay = '0' + oDay;
+				         return oYear + str + oMoth + str + oDay;
+
+				     }
+                          // var yesterday = getDay(-7, '-');		   -1 代表前一天，-2前两天...
+	}
+export default commfunc
+单文件引入  import commfunc from "@/common/common/common.js"    
+使用          commfunc。getDateToday（）
+全局引入，在main.js ，  import commfunc from "@/common/common/common.js"  
+Vue.prototype.commfunc =commfunc,直接使用。this.commfunc.getDay( )
+ 
+uniapp安装sass插件
+npm install node-sass --save-dev
+npm install sass-loader --save-dev  
+之后可以直接使用，无需配置
+
+
+计算属性computed :{
+   total (）{
+let me=this ;
+				
+ me.warehousingNamber= 0;
+me.CommodityInquirylist.forEach(function(item,index){
+                               me.warehousingNamber+=me.warehousingNamber*1
+})
+return  me.warehousingNamber
+}
+}
+计算后必须用return  返回 之后才能在页面    用{{total }} 表示，
 如果不用return 可以直接用{{warehousingNamber}} 来表示
 超出部分省略
 overflow: hidden;
