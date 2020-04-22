@@ -1,0 +1,48 @@
+节流：
+  
+规定在一个单位时间内，只能触发一次函数，如果这个单位时间内触发多次函数，只有一次生效； 典型的案例就是鼠标不断点击触发，规定在n秒内多次点击只有一次生效。
+searchAction: function () {
+      console.log('我是具体处理逻辑的方法')
+    },
+    fnThrottle (method, delay, duration) {
+      var that = this;
+      var timer = this.timer;
+      var begin = new Date().getTime();
+      return function(){
+        var context = that;
+        var args = arguments;
+        var current = new Date().getTime();
+        clearTimeout(timer);
+        if(current-begin>=duration){
+          method.apply(context,args);
+          begin=current;
+        }else{
+          console.log(delay)
+          that.timer=setTimeout(function(){
+            method.apply(context,args);
+          },delay);
+        }
+      }
+    },
+    // input change触发的事件
+    searchInputChage: function () {
+      this.fnThrottle(this.searchAction, 1000, 1000)();
+    }
+  }
+
+防抖 ：
+在事件被触发n秒后再执行回调，如果在这n秒内又被触发，则重新计时；典型的案例就是输入搜索：输入结束后n秒才进行搜索请求，n秒内又输入的内容，就重新计时。
+ 
+ if(this.timer){
+        // 如果有定时器,则清除
+        clearTimeout(this.timer)
+        this.timer=null
+    }
+    // 设置定时器和事件
+    this.timer=setTimeout(()=>{
+        // do something
+        this.handle()
+    },2000)
+ 
+
+
